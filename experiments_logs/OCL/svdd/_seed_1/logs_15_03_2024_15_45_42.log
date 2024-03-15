@@ -1,0 +1,2 @@
+2024-03-15 15:45:48,683 - root - INFO - Train_set has 150 pictures; Test_set has 45 pictures
+2024-03-15 15:45:56,441 - root - INFO - Test results:  AUC :54.05%; AP: 20.01%

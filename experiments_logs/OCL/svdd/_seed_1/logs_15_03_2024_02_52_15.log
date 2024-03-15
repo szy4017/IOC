@@ -1,0 +1,8 @@
+2024-03-15 02:52:23,978 - root - INFO - Train_set has 150 pictures; Test_set has 45 pictures
+2024-03-15 02:52:25,838 - root - INFO - Initializing center c...
+2024-03-15 02:52:29,731 - root - INFO - Center c initialized.
+2024-03-15 02:52:29,743 - root - INFO - Start training
+2024-03-15 02:52:32,454 - root - INFO - epoch : 1: train loss: 4.166149206459522 ; AUC :65.20%; AP: 24.95%
+2024-03-15 02:52:35,003 - root - INFO - epoch : 2: train loss: 0.14746682306653575 ; AUC :46.96%; AP: 17.66%
+2024-03-15 02:52:37,433 - root - INFO - epoch : 3: train loss: 0.08587739793093581 ; AUC :20.61%; AP: 12.46%
+2024-03-15 02:52:40,103 - root - INFO - epoch : 4: train loss: 0.0653676119584002 ; AUC :19.26%; AP: 12.24%

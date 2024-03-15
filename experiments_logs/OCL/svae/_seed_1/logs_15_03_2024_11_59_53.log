@@ -1,0 +1,4 @@
+2024-03-15 11:59:58,632 - root - INFO - Train_set has 150 pictures; Test_set has 45 pictures
+2024-03-15 12:00:00,506 - root - INFO - Initializing center c...
+2024-03-15 12:00:06,517 - root - INFO - Center c initialized.
+2024-03-15 12:00:06,517 - root - INFO - Start training
