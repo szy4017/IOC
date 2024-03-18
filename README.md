@@ -26,22 +26,34 @@ metrics:
 | ------- | ------- |
 | 59.09%   | 91.99% |
 
-**OCL-svae**
+**RTF-innd**
 
-log_path: `/data/szy4017/code/IOC/experiments_logs/RTF/svae/_seed_1/logs_18_03_2024_13_28_45.log`
+log_path: `/data/szy4017/code/IOC/experiments_logs/RTF/innd/_seed_1/logs_18_03_2024_14_30_18.log`
 
 metrics:
 
 | AUC     | AP      |
 | ------- | ------- |
-| 86.36%   | 97.51% |
+| 90.91%  | 98.60%  |
+
+**OCL-svae**
+
+log_path: `/data/szy4017/code/IOC/experiments_logs/RTF/svae/_seed_1/*`
+
+metrics:
+
+| Scene 1 |         | Scene 2 |         |
+| ------- | ------- | ------- | ------- |
+| AUC     | AP      | AUC     | AP      |
+| 00.00%  | 00.00%  | 00.00%  | 00.00%  |
 
 **OCL-svdd**
 
-log_path: `/data/szy4017/code/IOC/experiments_logs/RTF/svdd/_seed_1/logs_18_03_2024_13_46_59.log`
+log_path: `/data/szy4017/code/IOC/experiments_logs/RTF/svdd/_seed_1/*`
 
 metrics:
 
-| AUC     | AP      |
-| ------- | ------- |
-| 59.09%   | 91.99% |
+| Scene 1 |         | Scene 2 |         |
+| ------- | ------- | ------- | ------- |
+| AUC     | AP      | AUC     | AP      |
+| 00.00%  | 00.00%  | 00.00%  | 00.00%  |
