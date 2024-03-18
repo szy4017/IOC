@@ -11,6 +11,7 @@ class OCLDataset(Dataset):
         self.root_file = f'data/OCL/'
         self.scene = scene
         self.transform1 = transforms.Compose([transforms.Lambda(lambda x: x.crop((480,0,1920,320))),
+                                              transforms.Resize((360,80)),
                                               transforms.ToTensor()])
         if self.scene !='0':
             self.normal, self.abnormal = self.read_img(self.scene)
