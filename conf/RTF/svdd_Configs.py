@@ -1,8 +1,8 @@
 class Config(object):
     def __init__(self):
         # datasets
-        self.dataset = 'OCL'
-        self.img_size = (320, 1440)
+        self.dataset = 'RTF'
+        self.img_size = (224, 224)
         # model configs
         self.net_name = 'hsr_res18'  # ['hsr_LeNet', 'hsr_res18','res18_vae']
         self.project_channels = 512

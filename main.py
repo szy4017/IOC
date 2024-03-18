@@ -11,6 +11,7 @@ import torch.utils.data as data
 from utils.config import Config
 from utils.visualization.plot_images_grid import plot_images_grid
 from dataloader.ocl import OCLDataset
+from dataloader.rtf import RTFDataset
 
 
 def main(configs):
@@ -20,6 +21,9 @@ def main(configs):
     if configs.dataset == 'OCL':
         train_set = OCLDataset(configs.scene, type = 'train')
         test_set = OCLDataset(configs.scene, type = 'test')
+    elif configs.dataset == 'RTF':
+        train_set = RTFDataset(type = 'train')
+        test_set = RTFDataset(type = 'test')
     logger.info(f'Train_set has {len(train_set)} pictures; Test_set has {len(test_set)} pictures')
     train_loader = data.DataLoader(train_set, batch_size= configs.batch_size)
     test_loader = data.DataLoader(test_set, batch_size = configs.batch_size)

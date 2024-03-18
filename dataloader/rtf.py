@@ -7,17 +7,12 @@ import torch.nn.functional as F
 import json
 
 class RTFDataset(Dataset):
-    def __init__(self, scene, type = 'train'):
-        self.root_file = f'data/RTF/'
-        self.scene = scene
-        self.transform1 = transforms.Compose([transforms.Lambda(lambda x: x.crop((480,0,1920,360))),
-                                              transforms.ToTensor()])
-        if self.scene !='0':
-            self.normal, self.abnormal = self.read_img(self.scene)
-        else:
-            self.normal, self.abnormal = self.read_img_all()
+    def __init__(self, type = 'train'):
+        self.root = f'data/RTF/'
+        self.transform1 = transforms.Compose([transforms.ToTensor()])   # 不进行crop
+        self.normal, self.abnormal = self.read_img(type)
 
-        self.type  = type
+        self.type = type
         self.nr = 0.8
 
         self.train_data = torch.stack(self.normal[:int(self.nr*len(self.normal))])
@@ -32,8 +27,8 @@ class RTFDataset(Dataset):
         norm = {}
         norm['mean']= self.mean.tolist()
         norm['std']=self.std.tolist()
-        norm_file = self.root_file + self.scene + '/norm.json'
-        with open(norm_file,'w') as f:
+        norm_file = os.path.join(self.root, type, 'norm.json')
+        with open(norm_file, 'w') as f:
             json.dump(norm, f)
         
 
@@ -58,25 +53,23 @@ class RTFDataset(Dataset):
         else:
             return len(self.abnormal) + int((1-self.nr)*len(self.normal))
 
-    def read_img(self, scene):
-        file_list = os.listdir(self.root_file + f'{scene}/normal')
+    def read_img(self, type):
         normal_images = []
-        for image_path in file_list:
-            normal_images.append(self.transform1(Image.open(self.root_file + f'{scene}/normal/' + image_path)))
-     
         abnormal_images = []
-        for image_path in os.listdir(self.root_file + f'{scene}/abnormal'):
-            abnormal_images.append(self.transform1(Image.open(self.root_file + f'{scene}/abnormal/' + image_path)))
-        
-        return normal_images, abnormal_images
+        if type == 'train':
+            img_dir = os.path.join(self.root, type, 'Non defective')
+            img_list = os.listdir(img_dir)
+            for img_path in img_list:
+                normal_images.append(self.transform1(Image.open(os.path.join(img_dir, img_path))))
+        else:
+            img_dir = os.path.join(self.root, type, 'Non defective')
+            img_list = os.listdir(img_dir)
+            for img_path in img_list:
+                normal_images.append(self.transform1(Image.open(os.path.join(img_dir, img_path))))
 
-    def read_img_all(self):
-        normal_images, abnormal_images = [], []
+            img_dir = os.path.join(self.root, type, 'Defective')
+            img_list = os.listdir(img_dir)
+            for img_path in img_list:
+                abnormal_images.append(self.transform1(Image.open(os.path.join(img_dir, img_path))))
         
-        for scene in range(1,21):
-            # print(scene)
-            normal, abnormal = self.read_img(scene)
-            normal_images += normal
-            abnormal_images += abnormal
-
         return normal_images, abnormal_images

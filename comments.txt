@@ -1,0 +1,1 @@
+python main.py --dataset OCL --scene 1 --method svae --device cuda:0

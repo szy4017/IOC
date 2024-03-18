@@ -115,9 +115,10 @@ class ResNet18Enc(nn.Module):
 
 class ResNet18Dec(nn.Module):
 
-    def __init__(self, num_Blocks=[2,2,2,2], z_dim=10, nc=3):
+    def __init__(self, num_Blocks=[2,2,2,2], z_dim=10, nc=3, output_size=(320, 1440)):
         super().__init__()
         self.in_planes = 512
+        self.output_size = (output_size[0]//16, output_size[1]//16)
 
         self.linear = nn.Linear(z_dim, 512)
 
@@ -138,7 +139,7 @@ class ResNet18Dec(nn.Module):
     def forward(self, z):
         x = self.linear(z)
         x = x.view(z.size(0), 512, 1, 1)
-        x = F.interpolate(x, size=(20,90)) # (W/16, H/16)
+        x = F.interpolate(x, size=self.output_size) # (W/16, H/16)
         x = self.layer4(x)
         x = self.layer3(x)
         x = self.layer2(x)
@@ -153,7 +154,7 @@ class Res18_VAE(nn.Module):
         super().__init__()
         self.rep_dim = configs.project_channels
         self.encoder = ResNet18Enc(z_dim=self.rep_dim)
-        self.decoder = ResNet18Dec(z_dim=self.rep_dim)
+        self.decoder = ResNet18Dec(z_dim=self.rep_dim, output_size=configs.img_size)
 
     def forward(self, x):
         latent = self.encoder(x)
